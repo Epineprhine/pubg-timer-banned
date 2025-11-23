@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>До PUBG Mobile</title>
+  <style>
+    body {
+      background: #fafafa;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      color: #111;
+    }
+    h1 {
+      font-weight: 500;
+      font-size: 28px;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+    #timer {
+      font-size: 48px;
+      font-weight: 300;
+      letter-spacing: -1px;
+    }
+    .sad {
+      font-size: 40px;
+      opacity: 0.5;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>До того, как я снова сыграю в PUBG Mobile</h1>
+  <div id="timer">--:--:--</div>
+  <div class="sad">😔</div>
+
+  <script>
+    function updateCountdown() {
+      const now = new Date();
+      const nowUK = new Date(now.toLocaleString("en-GB", { timeZone: "Europe/London" }));
+      let target = new Date(nowUK);
+      target.setHours(9, 52, 37, 0);
+      if (nowUK > target) {
+        target.setDate(target.getDate() + 1);
+      }
+      const diff = target - nowUK;
+      const hrs = String(Math.floor(diff / 1000 / 60 / 60)).padStart(2, "0");
+      const mins = String(Math.floor(diff / 1000 / 60 % 60)).padStart(2, "0");
+      const secs = String(Math.floor(diff / 1000 % 60)).padStart(2, "0");
+      document.getElementById("timer").textContent = `${hrs}:${mins}:${secs}`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
